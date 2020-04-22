@@ -1,0 +1,19 @@
+<script>
+  // 写一个 UTF-8 Encoding 的函数
+  // =============资料
+  // UTF-8（8-bit Unicode Transformation Format）是一种针对Unicode的可变长度字符编码，也是一种前缀码。
+  // 它可以用一至四个字节对Unicode字符集中的所有有效编码点进行编码
+  // UTF-8就是以8位为单元对UCS进行编码
+  // 但为了与以前的ASCII码兼容（ASCII为一个字节），因此UTF-8选择了使用可变长度字节来存储Unicode
+  // UTF-8对所有常用的字符都可以用三个字节表示，而且它的另一种选择，
+  // UTF-16编码，对前述的第四种字符同样需要四个字节来编码，所以要决定UTF-8或UTF-16哪种编码比较有效率，还要视所使用的字符的分布范围而定。
+
+  function UTF8_Encoding(input) {
+    // return new Buffer();
+    // 此处只考虑ascii范围内的单字符
+    const string = String.toString(input)
+    const binaryString = string.codePointAt(0).toString(2)
+    return new Array(9 - binaryString.length).join(0) + binaryString
+  }
+  // UTF8_Encoding('0') // "01100110"
+</script>

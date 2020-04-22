@@ -1,0 +1,23 @@
+<script>
+  // 写一个正则表达式 匹配所有 Number 直接量
+  // 十进制数字 + 二进制整数 + 八进制整数 + 十六进制整数
+  // ===========十进制数字
+  const numReg = /(^(([0-9]{0,64})(\.?)([0-9]{0,64}))$)|(^0b[0-1]{1,64}$)|(^0o[0-7]{1,64}$)|(^0x[0-9|a-f]{1,64}$)/;
+  // const decimalNumReg = /(^(([0-9]{0,64})(\.?)([0-9]{0,64}))$)/;
+  // // 遗漏：暂不处理整数前面的0，小数后面的0，没处理空字符串，没处理单个小数点
+  // console.log(numReg.test(''));
+  // console.log(numReg.test('.'));
+  // console.log(numReg.test('02998230'));
+  // console.log(numReg.test('02998.230'));
+  // console.log(numReg.test('.230'));
+  // console.log(numReg.test('2.30'));
+  // // ===========二进制、八进制、十六进制的整数
+  // const otherNumReg = /(^0b[0-1]{1,64}$)|(^0o[0-7]{1,64}$)|(^0x[0-9|a-f]{1,64}$)/;
+  // // 遗漏：暂不处理数字的位数
+  // console.log(numReg.test('0b1101'));
+  // console.log(numReg.test('0b2101'));
+  // console.log(numReg.test('0o1231'));
+  // console.log(numReg.test('0o191'));
+  // console.log(numReg.test('0x1a91'));
+  // console.log(numReg.test('0x1s91'));
+</script>

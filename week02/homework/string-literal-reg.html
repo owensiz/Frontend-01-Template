@@ -1,0 +1,16 @@
+<script>
+  // 写一个正则表达式，匹配所有的字符串直接量，单引号和双引号
+  // ========regular
+  const strReg = /^('|")[\w|\b|\t|\n|\v|\f|\r|\\|]*("|')$/
+  // console.log(strReg.test("'1243'"));
+  // console.log(strReg.test("'1243'"));
+  // console.log(strReg.test("'12\t43'"));
+  // console.log(strReg.test('""'));
+  // console.log(strReg.test('``'));
+
+  // console.log(strReg.test('"\u2309"'));
+  // console.log(strReg.test('``'));
+  // ========unicode escape sequence 写不出来
+  // const str = /\\u[0-9a-fA-F]{4}/.test('\u1234')
+  // console.log(str.test('\u1234'));
+</script>
