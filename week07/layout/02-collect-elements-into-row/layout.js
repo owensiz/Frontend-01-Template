@@ -118,4 +118,15 @@ function layout(element) {
   }
 }
 
+let isAutoMainSize = false;
+if(!style[mainSize]) {
+  elementStyle[mainSize] = 0
+  for(let i=0;i<items.length;i++){
+    let item = items[i]
+    if(item[mainSize]!==null || item[mainSize]!==(void 0)){
+      elementStyle[mainSize]
+    }
+  }
+}
+
 module.exports = layout;
