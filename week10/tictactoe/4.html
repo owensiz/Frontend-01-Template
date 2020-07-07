@@ -1,0 +1,111 @@
+<style>
+  .cell {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background-color: pink;
+    color: #fff;
+    line-height: 100px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 80px;
+    border: 1px solid #fff;
+    user-select: none;
+  }
+</style>
+<div id="board"></div>
+<script>
+  let pattern = [
+    [2, 0, 0],
+    [0, 1, 0],
+    [0, 0, 0],
+  ]
+  let current = 1
+
+  function show(pattern) {
+    let board = document.getElementById('board')
+    board.innerHTML = '' //初始化一下
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        let cell = document.createElement('div')
+        cell.classList.add('cell')
+        cell.innerText = pattern[i][j] == 2 ? 'x' : pattern[i][j] == 1 ? 'o' : ''
+        cell.addEventListener('click', () => move(j, i)) //j,i 对应着 x,y
+        board.appendChild(cell)
+      }
+      // 要换行
+      board.appendChild(document.createElement('br'))
+    }
+  }
+
+  function move(x, y) {
+    // 不可在同一个格子重复落子
+    if (pattern[y][x]) return
+    pattern[y][x] = current
+    // check win的时机！！
+    if (checkWin(pattern, current)) {
+      let winner = current === 1 ? 'o' : 'x'
+      alert(`${winner} win!!`);
+    }
+    // 搞个变量，来形成 交替落子
+    current = 3 - current
+    //把ui操作全部交给show函数，思路类似于react的render函数
+    show(pattern)
+  }
+
+  function checkWin(pattern, current) {
+    // 直接把current传进去，就自动化惹
+    //横向的
+    for (let i = 0; i < 3; i++) {
+      let win = true; //设置win初始值为true，可以break，节省一下循环次数
+      for (let j = 0; j < 3; j++) {
+        if (pattern[i][j] !== current) {
+          win = false
+          break
+        }
+      }
+      if (win) return true
+    }
+
+    //纵向的，只需要把判断条件改为pattern[j][i] 
+    for (let i = 0; i < 3; i++) {
+      let win = true;
+      for (let j = 0; j < 3; j++) {
+        if (pattern[j][i] !== current) {
+          win = false
+          break
+        }
+      }
+      if (win) return true
+    }
+
+    // 左边对角线
+    {
+      //一个小技巧是用花括号形成局部作用域，这里的win就不会受外面干扰
+      let win = true;
+      for (let j = 0; j < 3; j++) {
+        if (pattern[j][j] !== current) {
+          win = false
+          break
+        }
+      }
+      if (win) return true
+    }
+
+    // 右边对角线
+    {
+      let win = true;
+      for (let j = 0; j < 3; j++) {
+        if (pattern[j][2 - j] !== current) {
+          win = false
+          break
+        }
+      }
+      if (win) return true
+    }
+
+    // 最后，循环完了，写个false
+    return false
+  }
+  show(pattern)
+</script>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="a">
+    <span>1</span>
+    <p>2</p>
+    <a href="">3</a>
+    <div>4</div>
+  </div>
+  <script>
+    const divA = document.getElementById('a')
+    // 希望重排次数尽可能少；使用这个只有两次，
+
+    function reverseChildren(element) {
+      let range = new Range() 
+      // 选中element所有的子元素
+      range.selectNodeContents(element)
+      // 把子元素全部都摘下来
+      let fragment = range.extractContents()
+      // 在fragment上操作，fragment是没有任何的重排和重绘的
+      let len = fragment.childNodes.length
+      while (len-- > 0) {
+        fragment.appendChild(fragment.childNodes[len])
+
+      }
+      element.appendChild(fragment)
+      // 最真实的dom操作只有两次，extractContents和appendChild这两次
+    }
+    reverseChildren(divA)
+    // 可以打个断点看看效果！！！！！！！！1
+    // 在比较耗性能或者海量dom节点，可以结合fragment使用range
+    // 或者精确dom操作，可以使用range
+  </script>
+</body>
+
+</html>

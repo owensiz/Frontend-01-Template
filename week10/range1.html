@@ -1,0 +1,16 @@
+<div id="a">123<span style="background-color: pink;">456789</span>12345678</div>
+<script>
+  let divA = document.getElementById('a')
+  let divASpan = divA.childNodes[1]
+  let divASpanText = divA.childNodes[1].childNodes[0]
+  const range = new Range()
+  range.setStart(divASpanText, 3)
+  range.setEnd(divA.childNodes[2], 3)
+  range.extractContents()
+  // range相当于对页面的dom树进行精细的手术
+  // range可以一次性切下来，切下来的是fragment，再可以用fragment一次性放上去
+  // 如果格式化了，就要把换行符也算进去，也是文本
+
+  // 答疑：
+  // childNodes会算上文本节点  
+</script>

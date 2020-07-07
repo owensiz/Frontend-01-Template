@@ -1,0 +1,16 @@
+<div id="a">
+  <span>1</span>
+  <p>2</p>
+  <p>3</p>
+  <div>4</div>
+</div>
+<script>
+  let element = document.getElementById('a')
+  function reverse(element){
+    let children = element.childNodes;
+    let arr = [];
+    [...children].forEach((item)=>{
+      arr.push(item)
+    })
+  }
+</script>

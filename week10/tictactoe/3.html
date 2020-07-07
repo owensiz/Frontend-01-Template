@@ -1,0 +1,51 @@
+<style>
+  .cell {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background-color: pink;
+    color: #fff;
+    line-height: 100px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 80px;
+    border: 1px solid #fff;
+    user-select: none;
+  }
+</style>
+<div id="board"></div>
+<script>
+  let pattern = [
+    [2, 0, 0],
+    [0, 1, 0],
+    [0, 0, 0],
+  ]
+  let current = 1
+
+  function show(pattern) {
+    let board = document.getElementById('board')
+    board.innerHTML = '' //初始化一下
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        let cell = document.createElement('div')
+        cell.classList.add('cell')
+        cell.innerText = pattern[i][j] == 2 ? 'x' : pattern[i][j] == 1 ? 'o' : ''
+        cell.addEventListener('click', () => move(j, i)) //j,i 对应着 x,y
+        board.appendChild(cell)
+      }
+      // 要换行
+      board.appendChild(document.createElement('br'))
+    }
+  }
+
+  function move(x, y) {
+    // 不可在同一个格子重复落子
+    if (pattern[y][x]) return
+    pattern[y][x] = current
+    // 搞个变量，来形成 交替落子
+    current = 3 - current
+    //把ui操作全部交给show函数，思路类似于react的render函数
+    show(pattern)
+  }
+  show(pattern)
+</script>

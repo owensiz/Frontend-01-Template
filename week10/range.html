@@ -1,0 +1,13 @@
+<div id="a">123456789</div>
+<script>
+  let divA = document.getElementById('a')
+  let divAText = divA.childNodes[0]
+  let range = new Range()
+  // range.setStart(divA, 0)
+  // range.setEnd(divA, 1)
+  range.setStart(divAText, 3)
+  range.setEnd(divAText, 7)
+  range.extractContents()
+  // range相当于对页面的dom树进行精细的手术
+  // range可以一次性切下来，切下来的是fragment，再可以用fragment一次性放上去
+</script>

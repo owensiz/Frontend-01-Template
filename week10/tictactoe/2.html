@@ -1,0 +1,38 @@
+<style>
+  .cell{
+    display: inline-block;;
+    width: 100px;
+    height: 100px;
+    background-color: pink;
+    color: #fff;
+    line-height: 100px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 80px;
+    border: 1px solid #fff;  
+  }
+</style>
+<div id="board"></div>
+<script>
+  let pattern = [
+    [2, 0, 0],
+    [0, 1, 0],
+    [0, 0, 0],
+  ]
+
+  function show(pattern) {
+    let board = document.getElementById('board')
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        let cell = document.createElement('div')
+        cell.classList.add('cell')
+        cell.innerText = pattern[j][i] == 2 ? 'x' : pattern[j][i] == 1 ? 'o' : ''
+        board.appendChild(cell)
+      }
+      // 要换行
+      board.appendChild(document.createElement('br'))
+    }
+
+  }
+  show(pattern)
+</script>

@@ -1,0 +1,22 @@
+<script>
+  // 最后20分钟
+  let names = Object.getOwnPropertyNames(window)
+  //  ==============================过滤掉js全局对象
+  //ECMA 262
+  {
+    let jsApis = new Set()
+    let objects = ['globalThis', 'console', 'BigInt', 'BigInt64Array', 'BigUnit64Array', 'Infinity', 'NaN', 'undefined',
+      'eval',
+      'isFinite', 'isNaN', 'parseInt', 'parseFloat',
+      'Unit8Array', 'Unit16Array', 'Unit32Array', 'Unit8ClampedArray', 'Atomics', 'JSON', 'Math', 'Reflect', 'escape',
+      'unescape'
+    ]
+    objects.forEach(o => jsApis.add(o))
+    names = names.filter(e => !jsApis.has(e))
+
+  }
+  //  ==============================过滤掉node api
+  {
+    names = names.
+  }
+</script>

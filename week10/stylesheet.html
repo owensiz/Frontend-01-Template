@@ -1,0 +1,12 @@
+<!-- 加一个styleSheets有两种方式：link和style -->
+<style title="Hello">
+  a::before {
+    color: red;
+    content: 'hello';
+  }
+</style>
+<link rel="stylesheet" title='x' href="data:text/css,p%7Bcolor:blue%7D">
+<!-- data url + 大括号转义 -->
+<!-- 凡是需要写url的地方，都可以用data url给他写成内联的 -->
+<!-- link要写rel,否则无法辨认为css -->
+<a> world</a>
