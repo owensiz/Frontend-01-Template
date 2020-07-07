@@ -1,0 +1,37 @@
+<script>
+  let handlers = []
+  let xxx = {
+    a: 1,
+    b: 2
+  }
+
+  function reactive(obj) {
+    return new Proxy(obj, {
+      get(obj, prop) {
+        // console.log('get', obj, prop);
+        return obj[prop]
+      },
+      set(obj, prop, val) {
+        obj[prop] = val
+        // console.log('set', obj, prop, val);
+        for (let handler of handlers) {
+          handler()
+        }
+        return obj[prop]
+      }
+    })
+  }
+
+  function effect(handler) {
+    handler()
+    handlers.push(handler)
+  }
+  let dummy;
+
+  let proxy = reactive(xxx)
+  // 调用effect
+  effect(() => dummy = proxy.a)
+  console.log(dummy);
+  proxy.a = 2
+  console.log(dummy);
+</script>
