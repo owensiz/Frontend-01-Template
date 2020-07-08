@@ -1,0 +1,26 @@
+<div id="dragable" style="width: 100px;height: 100px;background-color: pink;"></div>
+<script>
+  const dragable = document.getElementById('dragable')
+  let previousX = 0,
+    previousY = 0
+  dragable.addEventListener('mousedown', (e) => {
+    const startX = e.clientX,
+      startY = event.clientY
+    const move = (event) => {
+      // translate(x, y) 移到（x,y）位置，而不是移动x,y
+      // 新位置 = 鼠标终点 - 鼠标起点 + 上一次的位置
+      const x = (event.clientX - startX) + previousX,
+        y = (event.clientY - startY) + previousY
+      dragable.style.transform = `translate(${x}px,${y}px)`
+    }
+    const up = (event) => {
+      previousX = (event.clientX - startX) + previousX, previousY = (event.clientY - startY) + previousY
+      console.log(event.clientX, startX, previousX);
+      //mouseup时，取消绑定事件
+      document.removeEventListener('mousemove', move)
+      document.removeEventListener('mouseup', up)
+    }
+    document.addEventListener('mousemove', move)
+    document.addEventListener('mouseup', up)
+  })
+</script>

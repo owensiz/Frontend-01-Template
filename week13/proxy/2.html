@@ -1,5 +1,6 @@
 <script>
-  let handlers = new Map()
+  // rename handlers to handlerMap
+  let handlerMap = new Map()
   let usedReactivities = []
 
   let xxx = {
@@ -15,12 +16,13 @@
       },
       set(obj, prop, val) {
         obj[prop] = val
-        // for (let handler of handlers) {
+        // for (let handler of handlerMap) {
         //   handler()
         // }
-        if (handlers.get(obj)) {
-          if (handlers.get(obj).get(prop)) {
-            for (let handler of handlers.get(obj).get(prop)) {
+        // set的时候，针对收集到的依赖，从map中取出，决定要执行哪些函数
+        if (handlerMap.get(obj)) {
+          if (handlerMap.get(obj).get(prop)) {
+            for (let handler of handlerMap.get(obj).get(prop)) {
               handler()
             }
           }
@@ -33,22 +35,25 @@
   function effect(handler) {
     // 调用之前清空数组
     usedReactivities = []
+    // 修改usedReactivities数组
     handler()
+    // 然后再打印一下这个数组，就很符合思维逻辑。 清空-修改-展示 
     console.log(usedReactivities);
+    // 执行的时候进行依赖收集
     for (let usedReactivity of usedReactivities) {
       let [obj, prop] = usedReactivity
       console.log(obj, prop);
-      if (!handlers.has(obj)) {
-        handlers.set(obj, new Map())
+      if (!handlerMap.has(obj)) {
+        handlerMap.set(obj, new Map())
       }
-      if (!handlers.get(obj).has(prop)) {
-        handlers.get(obj).set(prop, [])
+      if (!handlerMap.get(obj).has(prop)) {
+        handlerMap.get(obj).set(prop, [])
       }
-      handlers.get(obj).get(prop).push(handler)
+      handlerMap.get(obj).get(prop).push(handler)
     }
   }
   let dummy;
-
+  // reactive生成之后得到了一个proxy
   let proxy = reactive(xxx)
   // 调用effect
   effect(() => dummy = proxy.a)
