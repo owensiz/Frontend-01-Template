@@ -11,7 +11,8 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}/week06/css-computing/07-specificity/client.js"
+      // "program": "${workspaceFolder}/week06/css-computing/07-specificity/client.js"
+      "program": "${workspaceFolder}/week14/component/main.js"
     }
   ]
 
